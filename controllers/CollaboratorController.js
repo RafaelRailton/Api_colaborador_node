@@ -1,6 +1,7 @@
 const { Validator } = require('node-input-validator')
 const CollaboratorModels = require('../models/Collaborator')
 const bcrypt = require('bcrypt')
+
 class CollaboratorController {
 async index(){
     let result = await CollaboratorModels.findAll();
