@@ -11,7 +11,7 @@ async create(req,res) {
         })
         const matched = await v.check();
         if (!matched) {
-            res.status = 422;
+            res.status = 422
             res.json(v.errors)
             return;
         }
@@ -20,7 +20,7 @@ async create(req,res) {
            res.status = 200
            res.json({'msg':'Cadastrado com sucesso!'})
        }else{
-           res.status = 400;
+           res.status = 400
            res.json({'msg':`Error ${result}`})
        }
 }
