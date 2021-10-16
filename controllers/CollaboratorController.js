@@ -1,5 +1,6 @@
 const { Validator } = require('node-input-validator')
 const CollaboratorModels = require('../models/Collaborator')
+const bcrypt = require('bcrypt')
 class CollaboratorController {
 async create(req,res) {
     let {name,cpf,sector,password} = req.body;
@@ -15,7 +16,8 @@ async create(req,res) {
             res.json(v.errors)
             return;
         }
-       let result =  await CollaboratorModels.insert(name,cpf,sector,password);
+       let hash = await bcrypt.hash(password.toString(),10); 
+       let result =  await CollaboratorModels.insert(name,cpf,sector,hash);
        if(result){
            res.status = 200
            res.json({'msg':'Cadastrado com sucesso!'})
