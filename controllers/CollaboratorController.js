@@ -12,17 +12,24 @@ async create(req,res) {
         })
         const matched = await v.check();
         if (!matched) {
-            res.status = 422
+            res.status(422)
             res.json(v.errors)
             return;
         }
-       let hash = await bcrypt.hash(password.toString(),10); 
-       let result =  await CollaboratorModels.insert(name,cpf,sector,hash);
+       let validCpf = await CollaboratorModels.findbyCpf(cpf)
+       
+       if(validCpf.length > 0){
+        res.status(400);
+        res.json({'msg':'Cpf já se encontra cadastrado!'})
+        return;
+       }
+       let hash = await bcrypt.hash(password.toString(),10) 
+       let result =  await CollaboratorModels.insert(name,cpf,sector,hash)
        if(result){
-           res.status = 200
+           res.status(200)
            res.json({'msg':'Cadastrado com sucesso!'})
        }else{
-           res.status = 400
+           res.status(400)
            res.json({'msg':`Error ${result}`})
        }
 }
