@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "express": "^4.17.1",
     "git-commit-msg-linter": "^3.2.8",
+    "knex": "^0.95.11",
     "standard": "^16.0.4"
   }
 }
