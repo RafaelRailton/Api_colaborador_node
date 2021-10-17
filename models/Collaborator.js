@@ -18,6 +18,15 @@ class CollaboratorModels {
             return error
         }
     }
+    async findbyEmail(){
+        try {
+            let result = knex('collaborator').select('*').where({email})
+            return result
+        } catch (error) {
+            console.log(error)
+            return []
+        }
+    }
     async findbyCpf(cpf){
         try {
             let result = knex('collaborator').select('*').where({cpf})
